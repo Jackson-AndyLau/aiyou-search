@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<!--配置Solr的客户端 -->
+	<bean id="httpSolrClient"
+		class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+		<!--注入solr连接地址 -->
+		<constructor-arg name="builder"
+			value="http://192.168.159.159:8080/solr/aiyou_01_core" />
+		<!-- 配置连接超时的时间 -->
+		<property name="connectionTimeout" value="10000" />
+		<!-- 配置socket超时的时间 -->
+		<property name="socketTimeout" value="60000" />
+	</bean>
+
+</beans>
