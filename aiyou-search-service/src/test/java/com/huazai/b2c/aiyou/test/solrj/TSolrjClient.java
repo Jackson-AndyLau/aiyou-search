@@ -3,16 +3,18 @@ package com.huazai.b2c.aiyou.test.solrj;
 import java.io.IOException;
 import java.util.HashMap;
 
-import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.MapSolrParams;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * 
@@ -47,9 +49,8 @@ public class TSolrjClient
 	@Test
 	public void addDocument()
 	{
-		// 通过HttpSolrClient.Builder一个SolrClient对象
-		SolrClient solrClient = new HttpSolrClient.Builder().withBaseSolrUrl(SOLR_URL).withConnectionTimeout(10000)
-				.withSocketTimeout(60000).build();
+		// 通过HttpSolrServer一个SolrServer对象
+		SolrServer solrServer = new HttpSolrServer(SOLR_URL);
 
 		// 创建SolrInputDocument文档流对象
 		SolrInputDocument doc = new SolrInputDocument();
@@ -61,9 +62,9 @@ public class TSolrjClient
 		try
 		{
 			// 添加文档
-			solrClient.add(doc);
+			solrServer.add(doc);
 			// 提交文档
-			solrClient.commit();
+			solrServer.commit();
 		} catch (SolrServerException e)
 		{
 			e.printStackTrace();
@@ -76,13 +77,7 @@ public class TSolrjClient
 		} finally
 		{
 			// 关闭连接
-			try
-			{
-				solrClient.close();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			solrServer.shutdown();
 		}
 	}
 
@@ -104,16 +99,15 @@ public class TSolrjClient
 	@Test
 	public void deleteDocumentById()
 	{
-		// 通过HttpSolrClient.Builder一个SolrClient对象
-		SolrClient solrClient = new HttpSolrClient.Builder().withBaseSolrUrl(SOLR_URL).withConnectionTimeout(10000)
-				.withSocketTimeout(60000).build();
+		// 通过HttpSolrServer一个SolrServer对象
+		SolrServer solrServer = new HttpSolrServer(SOLR_URL);
 
 		try
 		{
 			// 删除指定ID的文档
-			solrClient.deleteById("1001");
+			solrServer.deleteById("1001");
 			// 提交请求
-			solrClient.commit();
+			solrServer.commit();
 		} catch (SolrServerException e)
 		{
 			e.printStackTrace();
@@ -126,13 +120,7 @@ public class TSolrjClient
 		} finally
 		{
 			// 关闭连接
-			try
-			{
-				solrClient.close();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			solrServer.shutdown();
 		}
 	}
 
@@ -152,16 +140,15 @@ public class TSolrjClient
 	@Test
 	public void deleteDocumentByQuery()
 	{
-		// 通过HttpSolrClient.Builder一个SolrClient对象
-		SolrClient solrClient = new HttpSolrClient.Builder().withBaseSolrUrl(SOLR_URL).withConnectionTimeout(10000)
-				.withSocketTimeout(60000).build();
+		// 通过HttpSolrServer一个SolrServer对象
+		SolrServer solrServer = new HttpSolrServer(SOLR_URL);
 
 		try
 		{
 			// 删除指定ID的文档
-			solrClient.deleteByQuery("id:1001");
+			solrServer.deleteByQuery("id:1001");
 			// 提交请求
-			solrClient.commit();
+			solrServer.commit();
 		} catch (SolrServerException e)
 		{
 			e.printStackTrace();
@@ -174,13 +161,7 @@ public class TSolrjClient
 		} finally
 		{
 			// 关闭连接
-			try
-			{
-				solrClient.close();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			solrServer.shutdown();
 		}
 	}
 
@@ -201,8 +182,7 @@ public class TSolrjClient
 	public void queryDocumentById()
 	{
 		// 通过HttpSolrClient.Builder一个SolrClient对象
-		SolrClient solrClient = new HttpSolrClient.Builder().withBaseSolrUrl(SOLR_URL).withConnectionTimeout(10000)
-				.withSocketTimeout(60000).build();
+		SolrServer solrServer = new HttpSolrServer(SOLR_URL);
 
 		// 设置查询参数
 		// 第一种查询方式（）：MapSolrParams来实现
@@ -222,9 +202,9 @@ public class TSolrjClient
 		try
 		{
 			// 根据参数查询指定文档
-			QueryResponse query = solrClient.query(solrParams);
+			QueryResponse query = solrServer.query(solrParams);
 			// 提交查询请求
-			solrClient.commit();
+			solrServer.commit();
 			// 输出查询内容
 			SolrDocumentList list = query.getResults();
 			for (SolrDocument document : list)
@@ -245,14 +225,20 @@ public class TSolrjClient
 		} finally
 		{
 			// 关闭连接
-			try
-			{
-				solrClient.close();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			solrServer.shutdown();
 		}
+	}
+	
+	@Test
+	public void test() throws SolrServerException {
+		@SuppressWarnings("resource")
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
+		HttpSolrServer solrServer = applicationContext.getBean(HttpSolrServer.class);
+		SolrQuery solrQuery = new SolrQuery("*:*");
+		solrQuery.addField("id");
+		QueryResponse response = solrServer.query(solrQuery);
+		SolrDocumentList list = response.getResults();
+		System.out.println(list.size());
 	}
 
 }

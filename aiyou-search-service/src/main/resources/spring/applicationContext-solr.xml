@@ -11,15 +11,15 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
 	<!--配置Solr的客户端 -->
-	<bean id="httpSolrClient"
-		class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+	<bean id="httpSolrServer"
+		class="org.apache.solr.client.solrj.impl.HttpSolrServer">
 		<!--注入solr连接地址 -->
-		<constructor-arg name="builder"
-			value="http://192.168.159.159:8080/solr/aiyou_01_core" />
-		<!-- 配置连接超时的时间 -->
-		<property name="connectionTimeout" value="10000" />
-		<!-- 配置socket超时的时间 -->
-		<property name="socketTimeout" value="60000" />
+		<constructor-arg index="0" value="${solr.baseUrl}" />
+		<!-- 设置重试次数 -->
+		<property name="maxRetries" value="${solr.maxRetries}" />
+		<!-- 建立连接的最长时间 -->
+		<property name="connectionTimeout"
+			value="${solr.connectionTimeout}" />
 	</bean>
 
 </beans>

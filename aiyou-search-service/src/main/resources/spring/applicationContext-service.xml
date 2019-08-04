@@ -14,11 +14,11 @@
 
 	<!-- 配置service扫描包 -->
 	<context:component-scan
-		base-package="com.huazai.b2c.aiyou.service" />
+		base-package="com.huazai.b2c.aiyou.service.impl" />
 
 	<!-- 加载配置文件配置 -->
 	<context:property-placeholder
-		location="classpath:/resource/*.properties" />
+		location="classpath:resource/*.properties" />
 
 	<!-- 使用Dubbo发布服务 -->
 	<!-- 提供方应用信息，用来计算依赖关系 -->
@@ -28,8 +28,8 @@
 	<!-- 使用dubbo协议在20882端口暴露服务 -->
 	<dubbo:protocol name="dubbo" port="20882" />
 
-
-	<!-- <bean id="tbDubboServiceImpl" class="com.huazai.b2c.aiyou.service.impl.TbDubboServiceImpl"></bean> -->
+	<bean id="searchItemServiceImpl"
+		class="com.huazai.b2c.aiyou.service.impl.SearchItemServiceImpl" />
 
 	<!-- 声明需要暴露的服务端口 -->
 	<dubbo:service

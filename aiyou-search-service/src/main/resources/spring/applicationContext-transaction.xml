@@ -12,6 +12,7 @@
 		<!-- 配置引用数据源 -->
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
 	<!-- 配置通知 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
