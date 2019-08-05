@@ -4,15 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.huazai.b2c.aiyou.dao.SearchItemDao;
 import com.huazai.b2c.aiyou.dto.SearchItemDto;
 import com.huazai.b2c.aiyou.mapper.SearchItemMapper;
 import com.huazai.b2c.aiyou.repo.AiyouResultData;
+import com.huazai.b2c.aiyou.repo.SearchResultData;
 import com.huazai.b2c.aiyou.service.SearchItemService;
 
 /**
@@ -34,6 +37,9 @@ public class SearchItemServiceImpl implements SearchItemService
 
 	@Autowired
 	private SearchItemMapper searchItemMapper;
+
+	@Autowired
+	private SearchItemDao searchItemDao;
 
 	@Autowired
 	private SolrServer solrServer;
@@ -75,6 +81,43 @@ public class SearchItemServiceImpl implements SearchItemService
 			e.printStackTrace();
 		}
 		return AiyouResultData.ok();
+	}
+
+	@Override
+	public SearchResultData searchItemByPage(String query, Integer pageNum, Integer pageRow)
+	{
+		try
+		{
+			// 创建查询对象
+			SolrQuery solrQuery = new SolrQuery();
+			// 设置查询条件
+			solrQuery.setQuery(query);
+			// 设置分页条件
+			solrQuery.setStart((pageNum - 1) * pageRow);
+			solrQuery.setRows(pageRow);
+			// 指定默认搜索域
+			solrQuery.set("df", "item_title");
+			// 设置高亮
+			solrQuery.setHighlight(true);
+			solrQuery.addHighlightField("item_title");
+			solrQuery.setHighlightSimplePre("<em style=\"color:red\">");
+			solrQuery.setHighlightSimplePost("</em>");
+			// 执行查询
+			SearchResultData resultData = searchItemDao.search(solrQuery);
+			// 设置总页数
+			long recordCount = resultData.getRecordCount();
+			long pageCount = recordCount / pageRow;
+			if (recordCount % pageRow > 0)
+			{
+				pageCount++;
+			}
+			resultData.setPageCount(pageCount);
+			return resultData;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
