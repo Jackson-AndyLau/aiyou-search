@@ -57,20 +57,21 @@ public class SearchItemServiceImpl implements SearchItemService
 				doc.addField("item_image", searchItemDto.getImage());
 				doc.addField("item_category_name", searchItemDto.getCategory_name());
 				doc.addField("item_desc", searchItemDto.getItem_desc());
-				solrServer.add(doc);
+				sDocuments.add(doc);
 			}
 			// 将 SolrInputDocument 集合添加到索引库中
-			// solrServer.add(sDocuments);
+			solrServer.add(sDocuments);
 
 			// 提交请求
 			solrServer.commit();
 		} catch (SolrServerException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 		return AiyouResultData.ok();
