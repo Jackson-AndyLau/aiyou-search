@@ -24,7 +24,7 @@
 	<!-- 提供方应用信息，用来计算依赖关系 -->
 	<dubbo:application name="aiyou-search" />
 	<dubbo:registry protocol="zookeeper"
-		address="192.168.159.148:2181" />
+		address="192.168.182.128:2181" />
 	<!-- 使用dubbo协议在20882端口暴露服务 -->
 	<dubbo:protocol name="dubbo" port="20882" />
 
