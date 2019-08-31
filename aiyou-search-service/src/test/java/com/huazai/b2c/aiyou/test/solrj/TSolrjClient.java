@@ -31,7 +31,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class TSolrjClient
 {
-	public static final String SOLR_URL = "http://192.168.159.159:8080/solr/aiyou_01_core";
+	public static final String SOLR_URL = "http://192.168.182.128:8080/solr/aiyou_core";
 
 	/**
 	 * 
