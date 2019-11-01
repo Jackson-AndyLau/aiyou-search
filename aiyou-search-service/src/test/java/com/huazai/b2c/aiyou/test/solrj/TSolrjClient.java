@@ -3,10 +3,10 @@ package com.huazai.b2c.aiyou.test.solrj;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
@@ -31,7 +31,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class TSolrjClient
 {
-	public static final String SOLR_URL = "http://192.168.182.128:8080/solr/aiyou_core";
+//	public static final String SOLR_URL = "http://192.168.182.128:8080/solr/aiyou_core";
+	public static final String SOLR_URL = "http://192.168.159.129:6060/solr/aiyou_core";
 
 	/**
 	 * 
@@ -50,7 +51,8 @@ public class TSolrjClient
 	public void addDocument()
 	{
 		// 通过HttpSolrServer一个SolrServer对象
-		SolrServer solrServer = new HttpSolrServer(SOLR_URL);
+//		SolrServer solrServer = new HttpSolrServer(SOLR_URL);
+		SolrClient solrServer = new HttpSolrClient(SOLR_URL);
 
 		// 创建SolrInputDocument文档流对象
 		SolrInputDocument doc = new SolrInputDocument();
@@ -100,7 +102,8 @@ public class TSolrjClient
 	public void deleteDocumentById()
 	{
 		// 通过HttpSolrServer一个SolrServer对象
-		SolrServer solrServer = new HttpSolrServer(SOLR_URL);
+//		SolrServer solrServer = new HttpSolrServer(SOLR_URL);
+		SolrClient solrServer = new HttpSolrClient(SOLR_URL);
 
 		try
 		{
@@ -141,7 +144,8 @@ public class TSolrjClient
 	public void deleteDocumentByQuery()
 	{
 		// 通过HttpSolrServer一个SolrServer对象
-		SolrServer solrServer = new HttpSolrServer(SOLR_URL);
+//		SolrServer solrServer = new HttpSolrServer(SOLR_URL);
+		SolrClient solrServer = new HttpSolrClient(SOLR_URL);
 
 		try
 		{
@@ -182,7 +186,8 @@ public class TSolrjClient
 	public void queryDocumentById()
 	{
 		// 通过HttpSolrClient.Builder一个SolrClient对象
-		SolrServer solrServer = new HttpSolrServer(SOLR_URL);
+//		SolrServer solrServer = new HttpSolrServer(SOLR_URL);
+		SolrClient solrServer = new HttpSolrClient(SOLR_URL);
 
 		// 设置查询参数
 		// 第一种查询方式（）：MapSolrParams来实现
@@ -233,7 +238,8 @@ public class TSolrjClient
 	public void test() throws SolrServerException {
 		@SuppressWarnings("resource")
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
-		HttpSolrServer solrServer = applicationContext.getBean(HttpSolrServer.class);
+//		HttpSolrServer solrServer = applicationContext.getBean(HttpSolrServer.class);
+		HttpSolrClient solrServer = applicationContext.getBean(HttpSolrClient.class);
 		SolrQuery solrQuery = new SolrQuery("*:*");
 		solrQuery.addField("id");
 		QueryResponse response = solrServer.query(solrQuery);
