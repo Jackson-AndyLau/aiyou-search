@@ -11,21 +11,21 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
 	<!--配置Solr的客户端 -->
-<!-- 	<bean id="httpSolrClient"
-		class="org.apache.solr.client.solrj.impl.HttpSolrClient">
-		注入solr连接地址
+	<bean id="httpSolrServer"
+		class="org.apache.solr.client.solrj.impl.HttpSolrServer">
+		<!-- 注入solr连接地址 -->
 		<constructor-arg index="0" value="${solr.baseUrl}" />
-		设置重试次数
+		<!-- 设置重试次数 -->
 		<property name="maxRetries" value="${solr.maxRetries}" />
-		建立连接的最长时间
+		<!-- 建立连接的最长时间 -->
 		<property name="connectionTimeout"
 			value="${solr.connectionTimeout}" />
-	</bean> -->
+	</bean>
 	<!--配置Solr的客户端 -->
-	<bean id="cloudSolrClient" class="org.apache.solr.client.solrj.impl.CloudSolrClient">
+<!-- 	<bean id="cloudSolrClient" class="org.apache.solr.client.solrj.impl.CloudSolrClient">
 		<constructor-arg name="zkHost" value="${solrCloud.zkHosts}"></constructor-arg>
 		<property name="defaultCollection" value="aiyou_core"></property>
-	</bean>
+	</bean> -->
 	
 
 </beans>

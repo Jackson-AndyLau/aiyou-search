@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.CloudSolrClient;
+import org.apache.solr.client.solrj.impl.CloudSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
@@ -48,8 +48,8 @@ public class TSolrjCloud {
 	@Test
 	public void tSolrCloudAddDoc() throws SolrServerException, IOException {
 		// 1、创建SolrServer对象，使用CloudSolrServer子类，构造方法的参数是zookeeper的地址
-//		CloudSolrServer solrServer = new CloudSolrServer(SOLR_CLUSTER_URL);
-		CloudSolrClient solrServer = new CloudSolrClient(SOLR_CLUSTER_URL);
+		CloudSolrServer solrServer = new CloudSolrServer(SOLR_CLUSTER_URL);
+//		CloudSolrClient solrServer = new CloudSolrClient(SOLR_CLUSTER_URL);
 		// 2、设置 DefaultCollection 属性
 		solrServer.setDefaultCollection("aiyou_core");
 		// 3、创建 SolrInputDocument 对象
@@ -68,8 +68,8 @@ public class TSolrjCloud {
 	@Test
 	public void tSolrCloudQuaryDoc() {
 		// 1、创建SolrServer对象，使用CloudSolrServer子类，构造方法的参数是zookeeper的地址
-//		CloudSolrServer solrServer = new CloudSolrServer(SOLR_CLUSTER_URL);
-		CloudSolrClient solrServer = new CloudSolrClient(SOLR_CLUSTER_URL);
+		CloudSolrServer solrServer = new CloudSolrServer(SOLR_CLUSTER_URL);
+//		CloudSolrClient solrServer = new CloudSolrClient(SOLR_CLUSTER_URL);
 		// 指定查询的集合
 		solrServer.setDefaultCollection("aiyou_core");
 
