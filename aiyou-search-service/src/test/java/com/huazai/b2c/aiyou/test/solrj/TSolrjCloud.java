@@ -22,11 +22,12 @@ import org.junit.Test;
  *              </ul>
  * @className TSolrjCluster
  * @package com.huazai.b2c.aiyou.test.solrj
- * @createdTime 2019年10月31日 下午5:41:37
+ * @createdTime 2017年06月17日
  *
  * @version V1.0.0
  */
-public class TSolrjCloud {
+public class TSolrjCloud
+{
 
 	public static final String SOLR_CLUSTER_URL = "192.168.159.129:2001,192.168.159.129:2002,192.168.159.129:2003";
 
@@ -38,7 +39,7 @@ public class TSolrjCloud {
 	 *        <ul>
 	 * @description 测试新增文档
 	 *              </ul>
-	 * @createdTime 2019年10月31日 下午7:31:18
+	 * @createdTime 2017年06月17日
 	 * @throws SolrServerException
 	 * @throws IOException
 	 * @return void
@@ -46,10 +47,11 @@ public class TSolrjCloud {
 	 * @version : V1.0.0
 	 */
 	@Test
-	public void tSolrCloudAddDoc() throws SolrServerException, IOException {
+	public void tSolrCloudAddDoc() throws SolrServerException, IOException
+	{
 		// 1、创建SolrServer对象，使用CloudSolrServer子类，构造方法的参数是zookeeper的地址
 		CloudSolrServer solrServer = new CloudSolrServer(SOLR_CLUSTER_URL);
-//		CloudSolrClient solrServer = new CloudSolrClient(SOLR_CLUSTER_URL);
+		// CloudSolrClient solrServer = new CloudSolrClient(SOLR_CLUSTER_URL);
 		// 2、设置 DefaultCollection 属性
 		solrServer.setDefaultCollection("aiyou_core");
 		// 3、创建 SolrInputDocument 对象
@@ -65,11 +67,25 @@ public class TSolrjCloud {
 		solrServer.commit();
 	}
 
+	/**
+	 * 
+	 * @author HuaZai
+	 * @contact who.seek.me@java98k.vip
+	 * @title tSolrCloudQuaryDoc
+	 *        <ul>
+	 * @description SolrCloud文档查询测试单元
+	 *              </ul>
+	 * @createdTime 2017年06月17日
+	 * @return void
+	 *
+	 * @version : V1.0.0
+	 */
 	@Test
-	public void tSolrCloudQuaryDoc() {
+	public void tSolrCloudQuaryDoc()
+	{
 		// 1、创建SolrServer对象，使用CloudSolrServer子类，构造方法的参数是zookeeper的地址
 		CloudSolrServer solrServer = new CloudSolrServer(SOLR_CLUSTER_URL);
-//		CloudSolrClient solrServer = new CloudSolrClient(SOLR_CLUSTER_URL);
+		// CloudSolrClient solrServer = new CloudSolrClient(SOLR_CLUSTER_URL);
 		// 指定查询的集合
 		solrServer.setDefaultCollection("aiyou_core");
 
@@ -87,7 +103,7 @@ public class TSolrjCloud {
 		solrQuery.addField("id");
 		solrQuery.addField("item_title");
 		solrQuery.addField("item_price");
-		
+
 		try
 		{
 			// 根据参数查询指定文档
