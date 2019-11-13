@@ -73,6 +73,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
+		<!-- activemq 相关 -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+		</dependency>
 		<!-- solrj 客户端 -->
 		<dependency>
 			<groupId>org.apache.solr</groupId>
