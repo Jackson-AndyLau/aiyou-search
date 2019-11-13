@@ -1,5 +1,6 @@
 package com.huazai.b2c.aiyou.dao.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +11,14 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.huazai.b2c.aiyou.dao.SearchItemDao;
 import com.huazai.b2c.aiyou.dto.SearchItemDto;
+import com.huazai.b2c.aiyou.mapper.SearchItemMapper;
+import com.huazai.b2c.aiyou.repo.AiyouResultData;
 import com.huazai.b2c.aiyou.repo.SearchResultData;
 
 /**
@@ -36,6 +40,9 @@ public class SearchItemDaoImpl implements SearchItemDao
 
 	@Autowired
 	private SolrServer solrServer;
+
+	@Autowired
+	private SearchItemMapper searchItemMapper;
 
 	@Override
 	public SearchResultData search(SolrQuery solrQuery)
@@ -83,6 +90,37 @@ public class SearchItemDaoImpl implements SearchItemDao
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public AiyouResultData updateTbItemById(Long itemId)
+	{
+		// 通过商品ID获取商品信息
+		SearchItemDto searchItemDto = searchItemMapper.getTbItemById(itemId);
+		// 创建对象
+		SolrInputDocument doc = new SolrInputDocument();
+		try
+		{
+			// 添加文档域
+			doc.addField("id", searchItemDto.getId());
+			doc.addField("item_title", searchItemDto.getTitle());
+			doc.addField("item_sell_point", searchItemDto.getSell_point());
+			doc.addField("item_price", searchItemDto.getPrice());
+			doc.addField("item_image", searchItemDto.getImage());
+			doc.addField("item_category_name", searchItemDto.getCategory_name());
+			doc.addField("item_desc", searchItemDto.getItem_desc());
+			// 将文档添加到索引库
+			solrServer.add(doc);
+			// 提交事务
+			solrServer.commit();
+		} catch (SolrServerException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return AiyouResultData.ok();
 	}
 
 }

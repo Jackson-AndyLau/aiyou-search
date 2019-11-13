@@ -120,4 +120,11 @@ public class SearchItemServiceImpl implements SearchItemService
 		return null;
 	}
 
+	@Override
+	public AiyouResultData updateTbItemById(Long itemId)
+	{
+		AiyouResultData resultData = searchItemDao.updateTbItemById(itemId);
+		return resultData;
+	}
+
 }
