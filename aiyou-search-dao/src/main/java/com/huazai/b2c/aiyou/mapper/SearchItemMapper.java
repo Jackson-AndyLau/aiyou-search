@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.huazai.b2c.aiyou.dto.SearchItemDto;
-import com.huazai.b2c.aiyou.repo.SearchResultData;
 
 /**
  * 
