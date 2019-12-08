@@ -29,4 +29,14 @@
 		<constructor-arg name="name"
 			value="aiyou-change-topic"></constructor-arg>
 	</bean>
+
+	<!-- 配置商品消息监听器 -->
+	<bean id="tbItemChangeListener"
+		class="com.huazai.b2c.aiyou.listener.TbItemChangeListener"></bean>
+	<bean
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="topicDestination"></property>
+		<property name="messageListener" ref="tbItemChangeListener"></property>
+	</bean>
 </beans>
