@@ -32,7 +32,7 @@
 
 	<!-- 配置商品消息监听器 -->
 	<bean id="tbItemChangeListener"
-		class="com.huazai.b2c.aiyou.listener.TbItemChangeListener"></bean>
+		class="com.huazai.aiyou.search.listener.TbItemChangeListener"></bean>
 	<bean
 		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory"></property>

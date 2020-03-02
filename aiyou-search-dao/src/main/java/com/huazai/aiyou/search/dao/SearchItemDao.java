@@ -1,9 +1,9 @@
-package com.huazai.b2c.aiyou.dao;
+package com.huazai.aiyou.search.dao;
 
 import org.apache.solr.client.solrj.SolrQuery;
 
-import com.huazai.b2c.aiyou.repo.AiyouResultData;
-import com.huazai.b2c.aiyou.repo.SearchResultData;
+import com.huazai.aiyou.common.response.AiyouResultData;
+import com.huazai.aiyou.common.response.SearchResultData;
 
 /**
  * 
@@ -51,7 +51,7 @@ public interface SearchItemDao
 	 * @return SearchResultData
 	 *
 	 * @version : V1.0.0
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public AiyouResultData updateTbItemById(Long itemId);
 }

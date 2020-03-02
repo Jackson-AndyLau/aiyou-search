@@ -1,4 +1,4 @@
-package com.huazai.b2c.aiyou.dao.impl;
+package com.huazai.aiyou.search.dao.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,11 +15,11 @@ import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.huazai.b2c.aiyou.dao.SearchItemDao;
-import com.huazai.b2c.aiyou.dto.SearchItemDto;
-import com.huazai.b2c.aiyou.mapper.SearchItemMapper;
-import com.huazai.b2c.aiyou.repo.AiyouResultData;
-import com.huazai.b2c.aiyou.repo.SearchResultData;
+import com.huazai.aiyou.common.dto.SearchItemDto;
+import com.huazai.aiyou.common.response.AiyouResultData;
+import com.huazai.aiyou.common.response.SearchResultData;
+import com.huazai.aiyou.search.dao.SearchItemDao;
+import com.huazai.aiyou.search.mapper.SearchItemMapper;
 
 /**
  * 

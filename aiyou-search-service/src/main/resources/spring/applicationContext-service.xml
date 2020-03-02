@@ -14,7 +14,7 @@
 
 	<!-- 配置service扫描包 -->
 	<context:component-scan
-		base-package="com.huazai.b2c.aiyou" />
+		base-package="com.huazai.aiyou.search" />
 
 	<!-- 加载配置文件配置 -->
 	<context:property-placeholder
@@ -29,11 +29,11 @@
 	<dubbo:protocol name="dubbo" port="20882" />
 
 	<bean id="searchItemServiceImpl"
-		class="com.huazai.b2c.aiyou.service.impl.SearchItemServiceImpl" />
+		class="com.huazai.aiyou.search.service.impl.SearchItemServiceImpl" />
 
 	<!-- 声明需要暴露的服务端口 -->
 	<dubbo:service
-		interface="com.huazai.b2c.aiyou.service.SearchItemService"
+		interface="com.huazai.aiyou.search.service.SearchItemService"
 		ref="searchItemServiceImpl" timeout="30000" />
 
 </beans>

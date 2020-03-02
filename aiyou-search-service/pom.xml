@@ -3,20 +3,22 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.huazai.b2c.aiyou</groupId>
+		<groupId>com.huazai.aiyou.search</groupId>
 		<artifactId>aiyou-search</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>aiyou-search-service</artifactId>
 	<packaging>war</packaging>
 	<dependencies>
+		<!-- 引入 aiyou-search-interface 依赖包 -->
 		<dependency>
-			<groupId>com.huazai.b2c.aiyou</groupId>
+			<groupId>com.huazai.aiyou.search</groupId>
 			<artifactId>aiyou-search-interface</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!-- 引入 aiyou-search-dao 依赖包 -->
 		<dependency>
-			<groupId>com.huazai.b2c.aiyou</groupId>
+			<groupId>com.huazai.aiyou.search</groupId>
 			<artifactId>aiyou-search-dao</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

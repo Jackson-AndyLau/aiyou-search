@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.huazai.b2c.aiyou.mapper.SearchItemMapper">
+<mapper namespace="com.huazai.aiyou.search.mapper.SearchItemMapper">
 	<select id="getSearchItemList"
-		resultType="com.huazai.b2c.aiyou.dto.SearchItemDto">
+		resultType="com.huazai.aiyou.common.dto.SearchItemDto">
 		SELECT a.id, a.title, a.sell_point, a.price, a.image
 		,
 		b.NAME AS category_name, c.item_desc
@@ -14,7 +14,7 @@
 	</select>
 
 	<select id="getTbItemById"
-		resultType="com.huazai.b2c.aiyou.dto.SearchItemDto">
+		resultType="com.huazai.aiyou.common.dto.SearchItemDto">
 		SELECT a.id, a.title, a.sell_point, a.price, a.image
 		,
 		b.NAME AS category_name, c.item_desc

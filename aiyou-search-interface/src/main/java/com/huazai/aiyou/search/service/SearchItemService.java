@@ -1,7 +1,7 @@
-package com.huazai.b2c.aiyou.service;
+package com.huazai.aiyou.search.service;
 
-import com.huazai.b2c.aiyou.repo.AiyouResultData;
-import com.huazai.b2c.aiyou.repo.SearchResultData;
+import com.huazai.aiyou.common.response.AiyouResultData;
+import com.huazai.aiyou.common.response.SearchResultData;
 
 /**
  * 

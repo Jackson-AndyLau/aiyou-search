@@ -1,10 +1,11 @@
-package com.huazai.b2c.aiyou.mapper;
+package com.huazai.aiyou.search.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.huazai.b2c.aiyou.dto.SearchItemDto;
+import com.huazai.aiyou.common.dto.SearchItemDto;
+
 
 /**
  * 

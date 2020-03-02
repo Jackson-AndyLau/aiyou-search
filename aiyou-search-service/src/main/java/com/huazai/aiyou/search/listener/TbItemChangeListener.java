@@ -1,4 +1,4 @@
-package com.huazai.b2c.aiyou.listener;
+package com.huazai.aiyou.search.listener;
 
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -6,7 +6,7 @@ import javax.jms.TextMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.huazai.b2c.aiyou.service.SearchItemService;
+import com.huazai.aiyou.search.service.SearchItemService;
 
 /**
  * 
