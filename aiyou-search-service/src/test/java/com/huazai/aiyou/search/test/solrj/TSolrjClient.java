@@ -1,4 +1,4 @@
-package com.huazai.b2c.aiyou.test.solrj;
+package com.huazai.aiyou.search.test.solrj;
 
 import java.io.IOException;
 import java.util.HashMap;
